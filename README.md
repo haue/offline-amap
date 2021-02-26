@@ -80,6 +80,14 @@ obsoleted
   http://"+location.host+"/offline-amap/style/2.0
   ```
   
+  ```
+  https://
+  -->
+  http://
+  ```
+  
+  
+  
   
   
 - 3.js
