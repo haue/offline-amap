@@ -49,6 +49,9 @@ func handleAll(w http.ResponseWriter, r *http.Request) {
 	} else if strings.HasPrefix(path, "/style/2.0") {
 		a, _ := ioutil.ReadFile("js/11.js")
 		response = string(a)
+	} else if strings.HasPrefix(path, "/ui/1.1/ui/geo/DistrictExplorer/assets/d_v2/an_410000.json?v=1.1.2") {
+		a, _ := ioutil.ReadFile("js/12.js")
+		response = string(a)
 	}
 	fmt.Fprint(w, response)
 }
