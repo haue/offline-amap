@@ -1,0 +1,19 @@
+{
+  "name": "offline-amap",
+  "version": "0.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "index.d.ts
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:haue/offline-amap.git"
+  },
+  "keywords": [
+  ],
+  "author": "haue@live.cn",
+  "license": "MIT",
+  "devDependencies": {
+  }
+}
