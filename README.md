@@ -23,6 +23,8 @@
 	https://webapi.amap.com/style?name=macaron&key=6bb374bf3108300e7b2bcf0ed16a65a3&callback=jsonp_823235_1614219854076_
 11.js
 	https://vdata.amap.com/style/2.0
+12.js
+	http://webapi.amap.com/ui/1.1/ui/geo/DistrictExplorer/assets/d_v2/an_410000.json?v=1.1.2&key=
 ```
 
 
