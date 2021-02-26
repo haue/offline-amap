@@ -86,6 +86,14 @@ obsoleted
   http://
   ```
   
+  ```
+  poi名称
+  搜索function makeFetchRequest
+  函数内第一行加
+  const z1=self.location.origin+'/offline-amap'
+  g=g.replace(/^.*?vdata\d*?.amap.com/g,z1)
+  ```
+  
   
   
   
