@@ -1,18 +1,24 @@
 package main
 
 import (
+	"crypto/sha1"
+	"encoding/hex"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"path"
 	"regexp"
 	"strings"
 )
 
+var downloadPath = ""
+
 func handleAll(w http.ResponseWriter, r *http.Request) {
 	ruri := r.RequestURI
 	var response = ""
+	reFilename := regexp.MustCompile(`\w+\.[^\.]+$`)
 	if strings.HasPrefix(ruri, "/maps") {
 		a, _ := ioutil.ReadFile("js/1.js")
 		response = string(a)
@@ -53,16 +59,43 @@ func handleAll(w http.ResponseWriter, r *http.Request) {
 	} else if strings.HasPrefix(ruri, "/ui/1.1/ui/geo/DistrictExplorer/assets/d_v2/an_410000.json?v=1.1.2") {
 		a, _ := ioutil.ReadFile("js/12.js")
 		response = string(a)
+	} else if strings.HasPrefix(ruri, "/static/commonWordsInfo.v2.1.json") {
+		a, _ := ioutil.ReadFile("js/13.js")
+		w.Write(a)
+	} else if strings.HasPrefix(ruri, "/static/32-40863.v2.1.webp") {
+		a, _ := ioutil.ReadFile("js/32-40863.v2.1.webp")
+		w.Write(a)
 	} else if strings.HasPrefix(ruri, "/nebula") {
 		msg, _ := r.URL.Query()["msg"]
-		a, _ := ioutil.ReadFile(path.Join("C:/code/lab/amap-proxy/download", msg[0]+".txt"))
+		h := sha1.New()
+		h.Write([]byte(msg[0]))
+		if strings.Contains(msg[0], "285fd") {
+		}
+		sha1 := hex.EncodeToString(h.Sum(nil))
+		filepath := path.Join(downloadPath, sha1+".txt")
+		if _, err := os.Stat(filepath); os.IsNotExist(err) || len(msg) < 1 {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+		a, _ := ioutil.ReadFile(filepath)
+		w.Header().Set("Content-Type", "application/x-protobuf")
 		response = string(a)
+	} else if strings.HasPrefix(ruri, "/sdf") {
+		filename := reFilename.FindAllString(ruri, -1)[0]
+		filepath := path.Join(downloadPath, filename)
+		if _, err := os.Stat(filepath); os.IsNotExist(err) {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+		a, _ := ioutil.ReadFile(path.Join(downloadPath, filename))
+		w.Write(a)
 	}
 	fmt.Fprint(w, response)
 }
 
 func main() {
 	port := getenvDefault("PORT", "8001")
+	downloadPath = getenvDefault("DOWNLOADDIR", "download")
 	http.HandleFunc("/", handleAll)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

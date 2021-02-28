@@ -25,6 +25,9 @@
 	https://vdata.amap.com/style/2.0
 12.js
 	http://webapi.amap.com/ui/1.1/ui/geo/DistrictExplorer/assets/d_v2/an_410000.json?v=1.1.2&key=
+13.js
+	http://glyph.amap.com/static/commonWordsInfo.v2.1.json
+	
 ```
 
 
@@ -92,6 +95,8 @@ obsoleted
   函数内第一行加
   const z1=self.location.origin+'/offline-amap'
   g=g.replace(/^.*?vdata\d*?.amap.com/g,z1)
+  
+  //glyph.amap.com/sdf的替换
   ```
   
   
