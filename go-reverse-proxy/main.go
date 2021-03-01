@@ -104,7 +104,7 @@ func getenvDefault(k string, d string) string {
 	r := ""
 	a, _ := ioutil.ReadFile(".env")
 	sa := string(a)
-	arr := strings.Split(sa, "\n")
+	arr := strings.Split(strings.Replace(sa, "\r\n", "\n", -1), "\n")
 	b := false
 	for _, s := range arr {
 		kv := strings.Split(s, "=")

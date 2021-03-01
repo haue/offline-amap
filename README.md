@@ -8,9 +8,27 @@
 
 - js脚本自动移动地图到指定范围和zoom level
 
-# amap js
+# go-forward-proxy
 
-## js文件夹下的文件来源
+- 配置文件示例（.env）
+
+  ```
+  PORT=8888
+  DOWNLOADDIR=download
+  ```
+
+# go-reverse-proxy
+
+- 配置文件示例（.env）
+
+  ```
+  PORT=37706
+  DOWNLOADDIR=C:/code/offline-amap/go-forward-proxy/download
+  ```
+
+## amap js
+
+### js文件夹下的文件来源
 
 ```
 1.js:
@@ -44,7 +62,7 @@
 
 
 
-## 相关文件内容替换
+### 相关文件内容替换
 
 - base
 
